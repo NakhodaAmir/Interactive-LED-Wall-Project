@@ -1,23 +1,20 @@
-from arduino.app_utils import *
-from state_interface import LedController, Smile
-import state_interface
-import time
-
-numOfModes = 2
-mode = 0
+from smiletest import Smile
+from Frowntest import Frown
+from LedController import LedController
 
 
 def changeMode(num):
-    global mode 
+    global mode
     mode = num%numOfModes
     print(mode)
 
-Bridge.provide("ChangeMode", changeMode)
 
+frown = Frown()
 smile = Smile()
+mode = 0
+states =[smile, frown]
+numOfModes = len(states)
 
-name = LedController([smile])
+name = LedController(states)
 while True:
     name.update(mode)
-    time.sleep(0.01)
-    
