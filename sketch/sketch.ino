@@ -4,9 +4,10 @@
 Arduino_LED_Matrix matrix;
 uint8_t LedMatrix[104];
 
-void drawMatrix(String encoded) {
+int currentMode = 0;
+
+void drawMatrixBuiltIn(String encoded) {
   int i = 0;
-  //Turn string back into matrix
   while (encoded.length() > 0 && i < 104) {
     int comma = encoded.indexOf(',');
     if (comma == -1) { LedMatrix[i] = encoded.toInt(); break; }
@@ -21,9 +22,12 @@ void setup() {
   matrix.begin();
   matrix.setGrayscaleBits(1);
   Bridge.begin();
-  Bridge.provide("drawMatrix", drawMatrix);
+  Bridge.provide("drawMatrix", drawMatrixBuiltIn);
 }
 
 void loop() {
   Bridge.update();
+  Bridge.call("ChangeMode", currentMode); 
+  currentMode++;
+  delay(10);                   
 }
