@@ -6,5 +6,5 @@ class LedController:
 
     def update(self,mode):
         encoded = ",".join(str(x) for x in self.states[mode].calculate_array())
-        print(encoded)
+        #print(encoded)
         Bridge.call("drawMatrix", encoded)
