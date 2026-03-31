@@ -1,4 +1,6 @@
 from arduino.app_utils import *
+from state_interface import LedController, Smile
+import state_interface
 import time
 
 numOfModes = 2
@@ -12,27 +14,10 @@ def changeMode(num):
 
 Bridge.provide("ChangeMode", changeMode)
 
-logo = [0,0,0,0,0,0,0,0,0,0,0,0,0,
-        0,0,0,0,0,0,0,0,0,0,0,0,0,
-        0,0,1,1,0,0,0,0,0,1,1,0,0,
-        0,0,1,1,0,0,0,0,0,1,1,0,0,
-        0,0,0,0,0,0,0,0,0,0,0,0,0,
-        0,0,1,0,0,0,0,0,0,0,1,0,0,
-        0,0,0,1,1,1,1,1,1,1,0,0,0,
-        0,0,0,0,0,0,0,0,0,0,0,0,0]
+smile = Smile()
 
-logo2 = [0,0,0,0,0,0,0,0,0,0,0,0,0,
-        0,0,0,0,0,0,0,0,0,0,0,0,0,
-        0,0,1,1,0,0,0,0,0,1,1,0,0,
-        0,0,1,1,0,0,0,0,0,1,1,0,0,
-        0,0,0,0,0,0,0,0,0,0,0,0,0,
-        0,0,0,1,1,1,1,1,1,1,0,0,0,
-        0,0,1,0,0,0,0,0,0,0,1,0,0,
-        0,0,0,0,0,0,0,0,0,0,0,0,0]
-
-modes = [logo,logo2]
-
+name = LedController([smile])
 while True:
-    encoded = ",".join(str(x) for x in modes[mode])
-    Bridge.call("drawMatrix", encoded)
+    name.update(mode)
     time.sleep(0.01)
+    
