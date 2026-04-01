@@ -1,12 +1,14 @@
-from python.states.SmileTest import Smile
-from python.states.FrownTest import Frown
-from python.classes import LedController
+from states.SmileTest import Smile
+from states.FrownTest import Frown
+from states.Rotate import Rotate
+from classes.LedController import LedController
 from arduino.app_utils import *
 
 mode = 0
 frown = Frown()
+rotate = Rotate()
 smile = Smile()
-states =[smile, frown]
+states =[smile, frown, rotate]
 numOfModes = len(states)
 
 def changeMode(num):
