@@ -1,6 +1,6 @@
-from smiletest import Smile
-from Frowntest import Frown
-from LedController import LedController
+from python.states.SmileTest import Smile
+from python.states.FrownTest import Frown
+from python.classes import LedController
 from arduino.app_utils import *
 
 mode = 0
