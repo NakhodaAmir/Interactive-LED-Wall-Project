@@ -1,4 +1,4 @@
-from python.classes.LedState import LedState
+from classes.LedState import LedState
 
 class Frown(LedState):
     def __init__(self):
