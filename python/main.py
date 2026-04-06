@@ -1,22 +1,11 @@
-from python.states.SmileTest import Smile
-from python.states.FrownTest import Frown
-from python.classes import LedController
-from arduino.app_utils import *
+from states.SmileTest import Smile
+from states.FrownTest import Frown
+from states.Rotate import Rotate
+from classes.LedController import LedController
 
-mode = 0
-frown = Frown()
-smile = Smile()
-states =[smile, frown]
-numOfModes = len(states)
+def main():
+    controller = LedController([Rotate(), Smile(), Frown()])
+    controller.update()
 
-def changeMode(num):
-    global mode
-    mode = num%numOfModes
-    print(mode)
-
-Bridge.provide("ChangeMode", changeMode)
-
-
-name = LedController(states)
-while True:
-    name.update(mode)
+if __name__ == "__main__":
+    main()
