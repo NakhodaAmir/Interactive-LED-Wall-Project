@@ -29,5 +29,5 @@ void loop() {
   Bridge.update();
   Bridge.call("ChangeMode", currentMode); 
   currentMode++;
-  delay(1000);                   
+  delay(100000000000);                   
 }
