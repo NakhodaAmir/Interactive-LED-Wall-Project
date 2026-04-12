@@ -16,6 +16,5 @@ def main():
     controller = LedController([AudioTest(), Smile(), Frown()])
     controller.update()
 
-
 if __name__ == "__main__":
     main()

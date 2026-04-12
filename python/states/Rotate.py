@@ -27,7 +27,7 @@ class Rotate(LedState):
 
     def calculate_array(self, frame: int):
         # 1. Always start with a fresh blank canvas
-        arr = [[0 for _ in range(13)] for _ in range(8)]
+        arr = [[0 for _ in range(14)] for _ in range(19)]
 
         if frame <= 0:
             return super().calculate_array(arr)
