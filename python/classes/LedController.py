@@ -30,3 +30,15 @@ class LedController:
             Bridge.call("drawMatrix", encoded)
             sleep(0.01)
             self.current_frame += 1
+
+    def update_test(self):
+        while True:
+            if self.current_frame >= self.max_frame:
+                self.current_frame = 0
+            encoded = ",".join(str(x) for x in self.states[self.mode].calculate_array(self.current_frame))
+            chunks = [encoded[i:i + 26] for i in range(0, len(encoded), 26)]
+            for chunk in chunks:
+                print(chunk)
+            sleep(1)
+            self.current_frame += 1
+            print("--------------------------")
