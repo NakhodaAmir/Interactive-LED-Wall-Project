@@ -1,8 +1,12 @@
 from classes.MicController import getAudio
 import random
-
 from classes.LedState import LedState
 import numpy as np
+
+_ROWS, _COLS = 8, 13
+_Y_GRID, _X_GRID = np.ogrid[-_ROWS/2:_ROWS/2, -_COLS/2:_COLS/2]
+_Y_GRID = np.ascontiguousarray(_Y_GRID, dtype=np.float32)
+_X_GRID = np.ascontiguousarray(_X_GRID, dtype=np.float32)
 
 class FallingAstroid(LedState):
     def __init__(self):
@@ -12,55 +16,59 @@ class FallingAstroid(LedState):
     def calculate_array(self, step):
         min_y_distance = 3
         min_x_distance = 3
+        can_spawn = len(self.astroids) < 3
 
-        can_spawn = len(self.astroids) < 3 #number of astroids to spawn
-        # Vertical Spacing// only spawn astroid when there is a gap of min_y_distance
-        if can_spawn and len(self.astroids) > 0:
-            highest_astroid_height = self.astroids[len(self.astroids)-1].pos_y
-            can_spawn = highest_astroid_height >= (-8//2 + min_y_distance)
-        # Horizontal padding// only spawn an astroid when there is a gap of min_x_distance or when the astroid list is empty.
+        if can_spawn and self.astroids:
+            can_spawn = self.astroids[-1].pos_y >= (-_ROWS // 2 + min_y_distance)
+
         if can_spawn:
-            while True:
-                random_x = random.randint(-13//2, 13//2) # randomly spawn between bounds
-                if len(self.astroids) == 0 or abs(random_x - self.astroids[len(self.astroids)-1].pos_x) >= min_x_distance:
-                    random_min_size = random.randint(1,3)
-                    random_max_size = random.randint(4,6)
-                    new_astroid = Astroid(random_min_size, random_max_size, random_x, -8 // 2, 8, 13) #spawn astroid with a random size
+            for _ in range(10):
+                random_x = random.randint(-_COLS // 2, _COLS // 2)
+                if not self.astroids or abs(random_x - self.astroids[-1].pos_x) >= min_x_distance:
+                    new_astroid = Astroid(
+                        random.randint(1, 3),
+                        random.randint(4, 6),
+                        random_x, -_ROWS // 2
+                    )
                     self.astroids.append(new_astroid)
                     break
 
-        arr = np.zeros((8, 13), dtype=int)
+        arr = np.zeros((_ROWS, _COLS), dtype=np.uint8) 
+        mid_volume = getAudio()["Mid"]
 
+        active = []
         for astroid in self.astroids:
-            arr = arr | astroid.get_grid()
+            astroid.pulse_size(mid_volume)
+            np.logical_or(arr, astroid.get_grid(), out=arr)  
             astroid.fall()
-            astroid.pulse_size(getAudio()["Bass"])
-
-        self.astroids = [astroid for astroid in self.astroids if astroid.active]
+            if astroid.active:
+                active.append(astroid)
+        self.astroids = active
 
         return super().calculate_array(arr)
 
+
 class Astroid:
-    def __init__(self, min_size: int, max_size: int, pos_x: int, pos_y: int, rows:int, cols:int):
+    def __init__(self, min_size: int, max_size: int, pos_x: int, pos_y: int):
         self.min_size = min_size
         self.max_size = max_size
-        self.size = min_size
+        self.size = float(min_size)
         self.pos_x = pos_x
         self.pos_y = pos_y
-        self.rows = rows
-        self.cols = cols
         self.active = True
+        self._size_range = max_size - min_size  
 
     def fall(self):
         self.pos_y += 1
-        if self.pos_y > self.rows/2 + self.size:
+        if self.pos_y - self.size > _ROWS / 2:
             self.active = False
 
-    # mathematica formula of an astroid : (x-h)**(2/3) + (y-k)**(2/3) = a**(2/3)
     def get_grid(self):
-        y, x = np.ogrid[-self.rows/2:self.rows/2, -self.cols/2:self.cols/2] # y is rows, x is column 8 rows, 13 collumns
-        asteroid_area = ((x-self.pos_x)**2)**(1/3) + ((y-self.pos_y)**2)**(1/3) <= (self.size**2)**(1/3)
-        return asteroid_area.astype(int)
+        asteroid_area = (
+            np.abs(_X_GRID - self.pos_x) ** (2/3) +
+            np.abs(_Y_GRID - self.pos_y) ** (2/3)
+        ) <= self.size ** (2/3)
+        return asteroid_area
 
-    def pulse_size(self, volume):
-        self.size = ((self.max_size - self.min_size) * volume//100) - self.min_size
+    def pulse_size(self, volume: float):
+        self.size = self.min_size + self._size_range * min(volume, 100) / 100
