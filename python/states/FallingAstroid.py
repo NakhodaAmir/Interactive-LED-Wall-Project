@@ -1,4 +1,4 @@
-from classes.MicController import getAudio
+from classes.MicController import getVolume
 import random
 from classes.LedState import LedState
 import numpy as np
@@ -22,19 +22,17 @@ class FallingAstroid(LedState):
             can_spawn = self.astroids[-1].pos_y >= (-_ROWS // 2 + min_y_distance)
 
         if can_spawn:
-            for _ in range(10):
-                random_x = random.randint(-_COLS // 2, _COLS // 2)
-                if not self.astroids or abs(random_x - self.astroids[-1].pos_x) >= min_x_distance:
-                    new_astroid = Astroid(
-                        random.randint(1, 3),
-                        random.randint(4, 6),
-                        random_x, -_ROWS // 2
-                    )
-                    self.astroids.append(new_astroid)
-                    break
+            random_x = random.randint(-_COLS // 2, _COLS // 2)
+            if not self.astroids or abs(random_x - self.astroids[-1].pos_x) >= min_x_distance:
+                new_astroid = Astroid(
+                    random.randint(1, 3),
+                    random.randint(4, 6),
+                    random_x, -_ROWS // 2
+                )
+                self.astroids.append(new_astroid)
 
         arr = np.zeros((_ROWS, _COLS), dtype=np.uint8) 
-        mid_volume = getAudio()["Mid"]
+        mid_volume = getVolume()
 
         active = []
         for astroid in self.astroids:
@@ -71,4 +69,4 @@ class Astroid:
         return asteroid_area
 
     def pulse_size(self, volume: float):
-        self.size = self.min_size + self._size_range * min(volume, 100) / 100
+        self.size = self.min_size + self._size_range * min(volume, 100) / 50
