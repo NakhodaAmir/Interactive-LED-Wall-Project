@@ -6,11 +6,11 @@ RATE = 44100
 CHUNK = 2048
 
 maxLev = {
-    "Sub Bass": 2500,
-    "Bass":     5000,
-    "Mid":      15000,
-    "Treble":   3000,
-    "Air":      3000,
+    "Sub Bass": 15000,
+    "Bass":     15000,
+    "Mid":      5000,
+    "Treble":   750,
+    "Air":      300,
 }
 
 stream = p.open(format=pyaudio.paInt16,
