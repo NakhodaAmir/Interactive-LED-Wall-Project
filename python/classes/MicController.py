@@ -37,3 +37,9 @@ def getAudio():
         "Air":      get_band_level(fft, freqs, 8000, 20000)/maxLev["Air"],
     }
     return bands
+
+def getVolume():
+    data = stream.read(CHUNK, exception_on_overflow=False)
+    samples = np.frombuffer(data, dtype=np.int16).astype(float)
+    rms = np.sqrt(np.mean(samples**2))
+    return round((rms / 32767) * 100, 1)
