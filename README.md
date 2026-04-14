@@ -3,7 +3,7 @@
 ### Features
 #### LED States
 LED Wall Behavior
-1) [Bouncing bar](https://github.com/NakhodaAmir/Interactive-LED-Wall-Project/python/states/AudioTest.py)
+1) [Bouncing bar](https://github.com/NakhodaAmir/Interactive-LED-Wall-Project/blob/main/python/states/AudioTest.py)
 2) Circle
 3) Falling Astroid
 4) Percent Volume
