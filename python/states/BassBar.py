@@ -26,7 +26,7 @@ class BassBar(LedState):
 
     def mapVoltage(self, volume):
         v = int(((volume / self.maxV) * self.height) / 2)
-        row = np.zeros(15)
+        row = np.zeros(self.height)
         for i in range(v):
             row[self.midline - i] = 1
             row[self.midline + i] = 1
