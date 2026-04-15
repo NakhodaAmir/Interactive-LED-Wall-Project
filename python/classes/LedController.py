@@ -23,21 +23,6 @@ class LedController:
     # to show each iteration of the led state
     def update(self):
         while True:
-            encoded = ",".join(str(x) for x in self.states[self.mode].calculate_array(0))
+            encoded = ",".join(str(x) for x in self.states[self.mode].calculate_array())
             Bridge.call("drawMatrix", encoded)
-            if(self.mode == 1):
-                sleep(0.025)
-            else:
-                sleep(0.01)
-            
-
-    #testing loop that only prints out one cycle of the led state into the terminal prettily
-    def update_test(self):
-        for step in range(self.states[self.mode].max_frames + 1):
-            encoded = ",".join(str(x) for x in self.states[self.mode].calculate_array(step))
-            #Pretty Prints the design in the terminal
-            chunks = [encoded[i:i+26] for i in range(0, len(encoded), 26)]
-            for chunk in chunks:
-                print(chunk)
-            print("--------------------------")
-            sleep(1)
+            sleep(self.states[self.mode].frame_rate)
