@@ -4,11 +4,11 @@ import random
 
 class AudioTest(LedState):
     def __init__(self):
-        super().__init__(0)
+        super().__init__(0.01)
         self.column_order = list(range(13))
         random.shuffle(self.column_order)
 
-    def calculate_array(self, step):
+    def calculate_array(self):
         arr = [[0] * 13 for _ in range(8)]
         levels = getAudio()
         keys = ["Sub Bass", "Bass", "Mid", "Treble", "Air"]
