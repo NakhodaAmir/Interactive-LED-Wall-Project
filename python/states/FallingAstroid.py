@@ -10,10 +10,10 @@ _X_GRID = np.ascontiguousarray(_X_GRID, dtype=np.float32)
 
 class FallingAstroid(LedState):
     def __init__(self):
-        super().__init__(0)
+        super().__init__(0.025)
         self.astroids = []
 
-    def calculate_array(self, step):
+    def calculate_array(self):
         min_y_distance = 3
         min_x_distance = 3
         can_spawn = len(self.astroids) < 3
