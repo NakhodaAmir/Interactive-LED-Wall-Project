@@ -1,4 +1,4 @@
-from states.BouncyBar import bouncyBar
+from states.BouncyBar import BouncyBar
 from states.SmileTest import Smile
 from states.FrownTest import Frown
 from states.AudioTest import AudioTest
@@ -13,7 +13,7 @@ def main():
 #            print(f"{name:<10}: {level:.1f}")
 #        print("---")
 #        sleep(.1)
-    controller = LedController([AudioTest(), Smile(), Frown(), bouncyBar()])
+    controller = LedController([AudioTest(), Smile(), Frown(), BouncyBar()])
     controller.update()
 
 if __name__ == "__main__":

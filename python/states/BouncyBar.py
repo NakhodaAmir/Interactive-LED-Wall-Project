@@ -2,7 +2,7 @@ from classes.LedState import LedState
 from classes.MicController import getAudio
 import numpy as np
 
-class BassBar(LedState):
+class BouncyBar(LedState):
     maxV = 100
     width = 13
     height = 8
@@ -18,7 +18,7 @@ class BassBar(LedState):
     def __init__(self):
         super().__init__(0.01)
 
-    def bouncyBar(self):
+    def calculate_array(self):
         self.audio = getAudio()
         arr = np.zeros(self.height, self.width)
 
