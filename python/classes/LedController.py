@@ -16,7 +16,6 @@ class LedController:
     def changeMode(self, num):
         self.mode = num % self.num_of_modes
         print("Changed Mode!")
-
     
     #main loop of the controller
     # runs a for loop for the number of max_steps of the led state

@@ -11,7 +11,7 @@ class BassBar(LedState):
     currentVolume = audio["Bass"]
 
     def __init__(self):
-        super().__init__(0)
+        super().__init__(0.01)
 
     def bassBar(self):
         self.audio = getAudio()
@@ -21,7 +21,7 @@ class BassBar(LedState):
         shifted[:, :1] = arr[:, 1:] # copies arr to shifted with everything shifted 1 column right
         for i in range(self.height):
             shifted[i][0] = row[i]
-        return super().calculate_array(arr)
+        return super().calculate_array(super.coloredArray(arr))
 
 
     def mapVoltage(self, volume):

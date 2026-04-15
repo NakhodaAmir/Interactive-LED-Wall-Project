@@ -16,7 +16,7 @@ class BassBar(LedState):
 
 
     def __init__(self):
-        super().__init__(0)
+        super().__init__(0.01)
 
     def bouncyBar(self):
         self.audio = getAudio()
