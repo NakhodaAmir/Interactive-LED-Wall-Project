@@ -1,15 +1,23 @@
-# Overview 
-## LED Interactive Wall
-### Features
-#### [LED States](https://github.com/NakhodaAmir/Interactive-LED-Wall-Project/blob/main/python/classes/LedState.py)
-LED Wall Behavior
-1) [Bouncing bar](https://github.com/NakhodaAmir/Interactive-LED-Wall-Project/blob/main/python/states/AudioTest.py)
-2) [Circle](https://github.com/NakhodaAmir/Interactive-LED-Wall-Project/blob/main/python/states/Circle.py)
-3) [Falling Astroid](https://github.com/NakhodaAmir/Interactive-LED-Wall-Project/blob/main/python/states/FallingAstroid.py)
-4) [Percent Volume](https://github.com/NakhodaAmir/Interactive-LED-Wall-Project/blob/main/python/states/PercentVolume.py)
-#### [LED Controller](https://github.com/NakhodaAmir/Interactive-LED-Wall-Project/blob/main/python/classes/LedController.py)
-Controller state paterns that controls the LED with the above states
+# Intereactive LED Wall
+> An Arduino Uno Q project which displays a 19x14 LED strip wall interactively with sound detection from a microphone.
 
-# Usage
-- Power LED strips(5V & 20A)
-- Power the Arduino UNO Q(5-12V & 1-2A)
+## ✨ Features
+| Features | Description |
+| -------- | ----------- |
+| [Bouncy Bar](https://github.com/NakhodaAmir/Interactive-LED-Wall-Project/blob/main/python/states/BouncyBar.py) | Displays a bouncy bar on the LED wall. Features of the bouncy bar are relative to the detected audio's sub bass, bass, mid, treble and air |
+| [Circle](https://github.com/NakhodaAmir/Interactive-LED-Wall-Project/blob/main/python/states/Circle.py) | Draws a circle on the LED wall. Size of the circle is relative to the volume detected |
+| [Falling Astroid](https://github.com/NakhodaAmir/Interactive-LED-Wall-Project/blob/main/python/states/FallingAstroid.py) | Draws astroids falling from the top of the LED wall. Size of the astroids is relative to the volume detected |
+| [Percent Volume](https://github.com/NakhodaAmir/Interactive-LED-Wall-Project/blob/main/python/states/PercentVolume.py) | Displays a percentage(0-99) of how loud the detected audio is on the LED wall |
+
+## 🚀 Quick Start
+### Prerequisite
+* **Arduino Uno Q**
+* **Arduino App Lab**
+* **19x14 LED Wall**
+### Install
+Clone the repo to your local directory and upload the folder to the Arduino Uno !
+```bash
+git clone https://github.com/your-username/your-repo-name.git
+```
+### Run
+Power the Arduino Uno Q
