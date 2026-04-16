@@ -17,7 +17,7 @@
 ### Install
 Clone the repo to your local directory and upload the folder to the Arduino Uno !
 ```bash
-git clone https://github.com/your-username/your-repo-name.git
+git clone https://github.com/NakhodaAmir/Interactive-LED-Wall-Project.git
 ```
 ### Run
 Power the Arduino Uno Q
