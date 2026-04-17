@@ -32,11 +32,11 @@ Power the Arduino Uno Q
 
 ## 📂 Project Structure
 ```text
-├── main/
-│   ├── python/          # The State Machine & Audio Processing
-│   │   ├── classes/     # Core logic (LedController, MicController, LedState)
-│   │   └── states/      # Individual LED behaviors
-│   └── sketch/          # Arduino .ino source code
+main/
+├── python/          # The State Machine & Audio Processing
+│   ├── classes/     # Core logic (LedController, MicController, LedState)
+│   └── states/      # Individual LED behaviors
+├── sketch/          # Arduino .ino source code
 └── README.md
 ```
 
