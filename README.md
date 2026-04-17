@@ -3,6 +3,12 @@
 
 ## 🏆 Showcase
 
+## 📖 Table of Contents
+* [Features](#-features)
+* [Quick Start](#-quick-start)
+* [Project Structure](#-project-structure)
+* [API Refrence](#-api-reference)
+
 ## ✨ Features
 | Features | Description |
 | -------- | ----------- |
@@ -23,6 +29,16 @@ git clone https://github.com/NakhodaAmir/Interactive-LED-Wall-Project.git
 ```
 ### Run
 Power the Arduino Uno Q
+
+## 📂 Project Structure
+```text
+├── main/
+│   ├── python/          # The State Machine & Audio Processing
+│   │   ├── classes/     # Core logic (LedController, MicController, LedState)
+│   │   └── states/      # Individual LED behaviors
+│   └── sketch/          # Arduino .ino source code
+└── README.md
+```
 
 ## 📦 API Reference
 ### [sketch](../main/sketch/sketch.ino)
