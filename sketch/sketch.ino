@@ -5,6 +5,7 @@ Arduino_LED_Matrix matrix;
 uint8_t LedMatrix[104];
 
 int currentMode = 0;
+int lastButtonState = 0;
 
 void drawMatrixBuiltIn(String encoded) {
   int i = 0;
@@ -21,13 +22,20 @@ void drawMatrixBuiltIn(String encoded) {
 void setup() {
   matrix.begin();
   matrix.setGrayscaleBits(1);
+  Serial.begin(9600);
   Bridge.begin();
   Bridge.provide("drawMatrix", drawMatrixBuiltIn);
+  analogReadResolution(10);
 }
 
 void loop() {
   Bridge.update();
-  Bridge.call("ChangeMode", currentMode); 
-  currentMode++;
-  delay(100000000000);                   
+  int currentButtonState = analogRead(A0);
+  if (currentButtonState > 1020 && lastButtonState <= 1020) {
+    currentMode++;
+    Bridge.call("ChangeMode", currentMode);
+  }
+  lastButtonState = currentButtonState;
+  Serial.println(currentButtonState);
+  delay(10);
 }
