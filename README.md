@@ -2,6 +2,10 @@
 > An Arduino Uno Q project which displays a 19x14 LED strip wall interactively with sound detection from a microphone.
 
 ## 🏆 Showcase
+<img width="49%" alt="image" src="https://github.com/user-attachments/assets/083c1372-d653-4aeb-84b3-8430e23fe578" />
+<img width="49%" src="https://github.com/user-attachments/assets/0fe7dd41-c643-4566-8a39-94644f7e5f4e" />
+
+
 
 ## 📖 Table of Contents
 * [Features](#-features)
